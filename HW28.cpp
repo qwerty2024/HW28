@@ -66,6 +66,7 @@ void mergeSort(int *arr, int l, int r)
         // вызываем асинхронно рекурсию для правой части
         future<void> f = async(launch::async, [&](){ mergeSort(arr, l, m); } );
         mergeSort(arr, m + 1, r);
+        f.get();
     }
     else {
         // запускаем обе части синхронно
